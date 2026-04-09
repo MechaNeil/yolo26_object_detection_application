@@ -1,8 +1,24 @@
 // lib/test_yolo.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ultralytics_yolo/yolo.dart';
 
+void main() {
+  testWidgets('renders YOLO test button', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: TestYOLO(),
+      ),
+    );
+
+    expect(find.text('YOLO Test'), findsOneWidget);
+    expect(find.text('Test YOLO'), findsOneWidget);
+  });
+}
+
 class TestYOLO extends StatelessWidget {
+  const TestYOLO({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +29,7 @@ class TestYOLO extends StatelessWidget {
           onPressed: () async {
             try {
               final yolo = YOLO(
-                modelPath: 'yolo11n',
+                modelPath: 'empty_shelf_detector_model_float32',
                 task: YOLOTask.detect,
               );
 
