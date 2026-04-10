@@ -25,10 +25,7 @@ class _YOLODemoState extends State<YOLODemo> {
   Future<void> loadYOLO() async {
     setState(() => isLoading = true);
 
-    yolo = YOLO(
-      modelPath: 'empty_shelf_detector_model_float32',
-      task: YOLOTask.detect,
-    );
+    yolo = YOLO(modelPath: 'yolo26n_int8', task: YOLOTask.detect);
 
     await yolo!.loadModel();
     setState(() => isLoading = false);
@@ -64,10 +61,7 @@ class _YOLODemoState extends State<YOLODemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (selectedImage != null)
-                Container(
-                  height: 300,
-                  child: Image.file(selectedImage!),
-                ),
+                Container(height: 300, child: Image.file(selectedImage!)),
 
               SizedBox(height: 20),
 
@@ -94,7 +88,7 @@ class _YOLODemoState extends State<YOLODemo> {
                     return ListTile(
                       title: Text(detection['class'] ?? 'Unknown'),
                       subtitle: Text(
-                        'Confidence: ${(detection['confidence'] * 100).toStringAsFixed(1)}%'
+                        'Confidence: ${(detection['confidence'] * 100).toStringAsFixed(1)}%',
                       ),
                     );
                   },

@@ -29,7 +29,7 @@ class TestYOLO extends StatelessWidget {
           onPressed: () async {
             try {
               final yolo = YOLO(
-                modelPath: 'empty_shelf_detector_model_float32',
+                modelPath: 'yolo26n_int8',
                 task: YOLOTask.detect,
               );
 
