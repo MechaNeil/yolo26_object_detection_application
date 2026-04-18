@@ -44,6 +44,17 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    applicationVariants.all {
+        if (buildType.name == "release") {
+            val variant = this
+            outputs.all {
+                val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                val appName = "YoloScope"
+                output.outputFileName = "${appName}_v${variant.versionName}_${variant.name}.apk"
+            }
+        }
+    }
 }
 
 flutter {
